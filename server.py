@@ -5,7 +5,17 @@ s.bind((socket.gethostname(), 1234))
 s.listen(5)
 
 while True:
+    print("is running")
     clientsocket, address = s.accept()
-    print(f"Connection from {address} has been established!")
-    clientsocket.send(bytes("Welcome to the server!", "utf-8"))
+    with clientsocket:
+        print(f"Connection from {address} has been established!")
+        while True:
+            data = clientsocket.recv(1024)
+            if not data:
+                break
+            print(data)
+            clientsocket.sendall(data)
+    
+    
+    
     
