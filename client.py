@@ -6,6 +6,3 @@ s.connect((socket.gethostname(), 1234))
 
 msg = s.recv(1024)
 print(msg.decode("utf-8"))
-serversocket
-serversocket.send(bytes("Welcome to the server!", "utf-8"))
-s.close()
