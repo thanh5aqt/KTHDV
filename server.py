@@ -36,19 +36,22 @@ while True:
     clientsocket, address = s.accept()
     print(f"Connection from {address} has been established!")
     msg = clientsocket.recv(1024)
-    t = int(msg)
-    for st in studentlist:
-        if t == st.mssv:
-            count+=1
-            clientsocket.send(bytes("Ho va ten:","utf-8"))
-            clientsocket.send(bytes(st.ten,"utf-8"))
-            clientsocket.send(bytes(" Email:","utf-8"))
-            clientsocket.send(bytes(st.email,"utf-8"))
-            clientsocket.send(bytes(" Lop:","utf-8"))
-            clientsocket.send(bytes(st.lop,"utf-8"))
-            clientsocket.send(bytes(" Ngay Sinh:","utf-8"))
-            clientsocket.send(bytes(st.ns,"utf-8"))
-            clientsocket.send(bytes(" Que:","utf-8"))
-            clientsocket.send(bytes(st.que,"utf-8"))
-    if count == 0:
-        clientsocket.send(bytes("khong tim thay sinh vien", "utf-8"))
+    try:
+        t = int(msg)
+        for st in studentlist:
+            if t == st.mssv:
+                count+=1
+                clientsocket.send(bytes("Ho va ten:","utf-8"))
+                clientsocket.send(bytes(st.ten,"utf-8"))
+                clientsocket.send(bytes(" Email:","utf-8"))
+                clientsocket.send(bytes(st.email,"utf-8"))
+                clientsocket.send(bytes(" Lop:","utf-8"))
+                clientsocket.send(bytes(st.lop,"utf-8"))
+                clientsocket.send(bytes(" Ngay Sinh:","utf-8"))
+                clientsocket.send(bytes(st.ns,"utf-8"))
+                clientsocket.send(bytes(" Que:","utf-8"))
+                clientsocket.send(bytes(st.que,"utf-8"))
+        if count == 0:
+            clientsocket.send(bytes("Khong tim thay sinh vien", "utf-8"))
+    except ValueError:
+        clientsocket.send(bytes("Mssv vua nhap khong dung moi nhap lai", "utf-8"))
